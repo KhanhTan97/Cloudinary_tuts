@@ -6,6 +6,11 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router";
 
 /**
+ * Custom modules
+ */
+import { ThemeProvider } from "@/components/ThemeProvider";
+
+/**
  * Routes
  */
 import { router } from "@/routes";
@@ -17,6 +22,8 @@ import "@/index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>,
 );

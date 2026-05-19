@@ -9,6 +9,11 @@ import { Home } from "@/pages/drive/Home";
  */
 import { RootError } from "@/pages/error/Root";
 
+/**
+ * Pages
+ */
+import { Login } from "@/pages/auth/Login";
+
 export const router = createBrowserRouter([
   {
     path: "/",
