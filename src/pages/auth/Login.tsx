@@ -1,4 +1,16 @@
+/**
+ * Assets
+ */
 import { Logo } from "@/assets/logo";
+
+/**
+ * Components
+ */
+import { LoginForm } from "@/components/LoginForm";
+
+/**
+ * Node modules
+ */
 import { Link } from "react-router";
 
 export const Login = () => {
@@ -11,9 +23,12 @@ export const Login = () => {
           viewTransition
         >
           <div className="flex size-6 items-center justify-center">
-            <Logo />
+            <Logo variant="icon" />
           </div>
+          Cloudbin
         </Link>
+
+        <LoginForm />
       </div>
     </div>
   );
