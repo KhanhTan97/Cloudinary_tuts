@@ -2,7 +2,6 @@
  * Node modules
  */
 import { createBrowserRouter } from "react-router";
-import { Home } from "@/pages/drive/Home";
 
 /**
  * Error pages
@@ -13,6 +12,11 @@ import { RootError } from "@/pages/error/Root";
  * Pages
  */
 import { Login } from "@/pages/auth/Login";
+
+/**
+ * Actions
+ */
+import { loginAction } from "@/routes/actions/login";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +29,7 @@ export const router = createBrowserRouter([
       {
         path: "login",
         Component: Login,
+        action: loginAction,
       },
     ],
   },
