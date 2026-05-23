@@ -2,7 +2,7 @@
  * Node modules
  */
 import React, { useCallback, useEffect } from "react";
-import { useFetcher, useSearchParams } from "react-router";
+import { useFetcher } from "react-router";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,31 +46,19 @@ import type { SubmitHandler } from "react-hook-form";
 /**
  * Form Schema
  */
-const formSchema = z
-  .object({
-    password: z.string().min(8, "Password must be at least 8 characters long."),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Password doesn't match",
-    path: ["confirmPassword"],
-  });
+const formSchema = z.object({
+  email: z.email("Please enter a valid email address."),
+});
 
-export const ForgotPasswordForm = ({
+export const ResetPasswordForm = ({
   className,
   ...props
 }: React.ComponentProps<"div">) => {
   const fetcher = useFetcher();
-  const [searchParams] = useSearchParams();
-
-  const userId = searchParams.get("userId");
-  const secret = searchParams.get("secret");
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      password: "",
-      confirmPassword: "",
+      email: "",
     },
   });
 
@@ -80,28 +68,21 @@ export const ForgotPasswordForm = ({
     if (!fetcher.data) return;
 
     if (fetcher.data.ok) {
-      toast.success("Password has been reset successfully.");
+      toast.success("Password reset email sent! Check your inbox.");
       form.reset();
     } else {
-      toast.error(fetcher.data.error ?? "Failed to reset password.");
+      toast.error(fetcher.data.error ?? "Something went wrong");
     }
   }, [fetcher.data, form]);
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = useCallback(
     (values) => {
-      fetcher.submit(
-        {
-          ...values,
-          userId,
-          secret,
-        },
-        {
-          method: "post",
-          encType: "application/json",
-        },
-      );
+      fetcher.submit(values, {
+        method: "post",
+        encType: "application/json",
+      });
     },
-    [userId, secret],
+    [],
   );
 
   return (
@@ -111,7 +92,7 @@ export const ForgotPasswordForm = ({
           <CardTitle className="text-xl">Forgot password?</CardTitle>
 
           <CardDescription>
-            Your new password must be different to previously used passwords.
+            No worries, we'll send you reset instructions.
           </CardDescription>
         </CardHeader>
 
@@ -121,36 +102,14 @@ export const ForgotPasswordForm = ({
               <FieldGroup>
                 <Controller
                   control={form.control}
-                  name="password"
+                  name="email"
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel>Password</FieldLabel>
+                      <FieldLabel>Email</FieldLabel>
 
                       <Input
-                        type="password"
-                        placeholder="Set new password"
-                        {...field}
-                      />
-
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
-                      )}
-                    </Field>
-                  )}
-                />
-              </FieldGroup>
-
-              <FieldGroup>
-                <Controller
-                  control={form.control}
-                  name="confirmPassword"
-                  render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel>Confirm password</FieldLabel>
-
-                      <Input
-                        type="password"
-                        placeholder="Confirm new password"
+                        type="email"
+                        placeholder="Enter your email"
                         {...field}
                       />
 
@@ -183,11 +142,6 @@ export const ForgotPasswordForm = ({
           </form>
         </CardContent>
       </Card>
-
-      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our <a href="#">Term of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
-      </div>
     </div>
   );
 };

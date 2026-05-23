@@ -9,11 +9,17 @@ import { createBrowserRouter } from "react-router";
 import { RootError } from "@/pages/error/Root";
 
 /**
+ * Layouts
+ */
+import { AppLayout } from "@/layouts/AppLayout";
+
+/**
  * Pages
  */
 import { Login } from "@/pages/auth/Login";
 import { Signup } from "@/pages/auth/Signup";
 import { ForgotPassword } from "@/pages/auth/ForgotPassword";
+import { ResetPassword } from "@/pages/auth/ResetPassword";
 
 /**
  * Actions
@@ -21,6 +27,7 @@ import { ForgotPassword } from "@/pages/auth/ForgotPassword";
 import { loginAction } from "@/routes/actions/login";
 import { signupAction } from "@/routes/actions/signup";
 import { forgotPasswordAction } from "@/routes/actions/forgotPassword";
+import { resetPasswordAction } from "@/routes/actions/resetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +52,15 @@ export const router = createBrowserRouter([
         Component: ForgotPassword,
         action: forgotPasswordAction,
       },
+      {
+        path: "reset-password",
+        Component: ResetPassword,
+        action: resetPasswordAction,
+      },
     ],
+  },
+  {
+    path: "/drive",
+    Component: AppLayout,
   },
 ]);
