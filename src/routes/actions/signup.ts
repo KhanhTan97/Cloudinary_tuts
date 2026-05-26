@@ -18,7 +18,7 @@ export const signupAction: ActionFunction = async ({ request }) => {
   const data = (await request.json()) as SignupForm;
 
   try {
-    const user = await account.create({
+    await account.create({
       userId: ID.unique(),
       ...data,
     });

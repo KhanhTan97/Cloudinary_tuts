@@ -20,6 +20,7 @@ import { Login } from "@/pages/auth/Login";
 import { Signup } from "@/pages/auth/Signup";
 import { ForgotPassword } from "@/pages/auth/ForgotPassword";
 import { ResetPassword } from "@/pages/auth/ResetPassword";
+import { Home } from "@/pages/drive/Home";
 
 /**
  * Actions
@@ -28,6 +29,13 @@ import { loginAction } from "@/routes/actions/login";
 import { signupAction } from "@/routes/actions/signup";
 import { forgotPasswordAction } from "@/routes/actions/forgotPassword";
 import { resetPasswordAction } from "@/routes/actions/resetPassword";
+import { driveActions } from "@/routes/actions/driveAction";
+
+/**
+ * Loaders
+ */
+import { driveLoader } from "@/routes/loaders/drive";
+import { driveFileLoader } from "@/routes/loaders/fileLoader";
 
 export const router = createBrowserRouter([
   {
@@ -62,5 +70,14 @@ export const router = createBrowserRouter([
   {
     path: "/drive",
     Component: AppLayout,
+    loader: driveLoader,
+    action: driveActions,
+    children: [
+      {
+        path: "home",
+        Component: Home,
+        loader: driveFileLoader,
+      },
+    ],
   },
 ]);

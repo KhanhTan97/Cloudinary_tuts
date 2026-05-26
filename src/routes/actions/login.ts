@@ -22,7 +22,7 @@ export const loginAction: ActionFunction = async ({ request }) => {
       ...data,
     });
 
-    return redirect("/drive/home");
+    return redirect("/drive");
   } catch (error) {
     if (error instanceof AppwriteException) {
       return { ok: false, error: error };
