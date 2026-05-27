@@ -36,7 +36,7 @@ import { Button } from "@/components/ui/button";
 /**
  * Assets
  */
-import { Upload, UploadIcon } from "lucide-react";
+import { UploadIcon } from "lucide-react";
 
 interface Props {
   open: boolean;
