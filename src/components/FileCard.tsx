@@ -2,10 +2,12 @@
  * Node modules
  */
 import { useCallback, useMemo, useState } from "react";
+import { Image } from "@imagekit/react";
 
 /**
  * Custom modules
  */
+import { formatCustomDate } from "@/lib/utils";
 
 /**
  * Types
@@ -16,7 +18,13 @@ import { fileIcons } from "@/assets/icons/file";
 /**
  * Components
  */
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { FileMenu } from "@/components/FileMenu";
 
 /**
@@ -59,6 +67,28 @@ export const FileCard = ({ file }: { file: File }) => {
             <FileMenu file={file} />
           </CardTitle>
         </CardHeader>
+
+        <CardContent
+          className="grow cursor-pointer"
+          onClick={() => setDetailOpen(true)}
+        >
+          <Image
+            urlEndpoint={import.meta.env.VITE_IMAGEKIT_URL_ENDPOINT}
+            src={thumbnail}
+            height={500}
+            width={500}
+            alt={file.name}
+            loading="lazy"
+            className="w-full h-full object-cover rounded-lg"
+          />
+        </CardContent>
+
+        <CardFooter>
+          <p>
+            Last updated:{" "}
+            {file.updatedAt ? formatCustomDate(file.updatedAt) : "Unknown"}
+          </p>
+        </CardFooter>
       </Card>
     </>
   );
