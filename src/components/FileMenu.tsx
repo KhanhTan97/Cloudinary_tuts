@@ -30,6 +30,7 @@ import {
 import { RenameFile } from "@/components/RenameFile";
 import { FileInformation } from "@/components/FileInformation";
 import { DeleteFile } from "@/components/DeleteFile";
+import { FileDetails } from "@/components/FileDetails";
 
 /**
  * Assets
@@ -137,6 +138,12 @@ export const FileMenu = ({ file }: { file: File }) => {
         onOpenChange={setDeleteOpen}
         fileId={file.fileId}
         fileUrl={file.url}
+      />
+
+      <FileDetails
+        open={detailsOpen}
+        onOpenChange={setDetailsOpen}
+        file={file}
       />
     </>
   );
