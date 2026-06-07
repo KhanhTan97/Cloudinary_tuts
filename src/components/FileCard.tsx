@@ -26,6 +26,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FileMenu } from "@/components/FileMenu";
+import { FileDetails } from "@/components/FileDetails";
 
 /**
  * Assets
@@ -75,8 +76,9 @@ export const FileCard = ({ file }: { file: File }) => {
           <Image
             urlEndpoint={import.meta.env.VITE_IMAGEKIT_URL_ENDPOINT}
             src={thumbnail}
-            height={500}
-            width={500}
+            height={400}
+            width={400}
+            transformation={[{ width: 400, height: 400 }]}
             alt={file.name}
             loading="lazy"
             className="w-full h-full object-cover rounded-lg"
@@ -90,6 +92,8 @@ export const FileCard = ({ file }: { file: File }) => {
           </p>
         </CardFooter>
       </Card>
+
+      <FileDetails open={detailOpen} onOpenChange={setDetailOpen} file={file} />
     </>
   );
 };

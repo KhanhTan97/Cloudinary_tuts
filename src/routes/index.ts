@@ -21,6 +21,9 @@ import { Signup } from "@/pages/auth/Signup";
 import { ForgotPassword } from "@/pages/auth/ForgotPassword";
 import { ResetPassword } from "@/pages/auth/ResetPassword";
 import { Home } from "@/pages/drive/Home";
+import { FolderPreview } from "@/pages/drive/FolderPreview";
+import { RecentFiles } from "@/pages/drive/RecentFiles";
+import { MyDrive } from "@/pages/drive/MyDrive";
 
 /**
  * Actions
@@ -36,6 +39,7 @@ import { driveActions } from "@/routes/actions/driveAction";
  */
 import { driveLoader } from "@/routes/loaders/drive";
 import { driveFileLoader } from "@/routes/loaders/fileLoader";
+import { driveFolderLoader } from "@/routes/loaders/folderLoader";
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +81,21 @@ export const router = createBrowserRouter([
         path: "home",
         Component: Home,
         loader: driveFileLoader,
+      },
+      {
+        path: "my-drive",
+        Component: MyDrive,
+        loader: driveFileLoader,
+      },
+      {
+        path: "recent",
+        Component: RecentFiles,
+        loader: driveFileLoader,
+      },
+      {
+        path: "folders/:folderName",
+        Component: FolderPreview,
+        loader: driveFolderLoader,
       },
     ],
   },

@@ -11,7 +11,7 @@ import type { File } from "@/types/all-types";
 export const FileInfo = ({ file }: { file: File }) => {
   return (
     <div className="space-y-2 text-sm">
-      <p>
+      <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-full">
         <strong>Name:</strong> {file.name}
       </p>
 

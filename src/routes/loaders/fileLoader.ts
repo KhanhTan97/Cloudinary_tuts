@@ -21,13 +21,13 @@ import axios from "axios";
  */
 const API_KEY = btoa(`${import.meta.env.VITE_IMAGEKIT_API_KEY}:`);
 
-const getFiles = async (folderName: string, isRecent?: boolean) => {
+const getFiles = async (fileName: string, isRecent?: boolean) => {
   const options: AxiosRequestConfig = {
     method: "GET",
     url: import.meta.env.VITE_IMAGEKIT_API_ENDPOINT,
     headers: { Accept: "application/json", Authorization: `Basic ${API_KEY}` },
     params: {
-      path: folderName || "",
+      path: fileName || "",
       sort: isRecent ? "DESC_CREATED" : "ASC_CREATED",
     },
   };

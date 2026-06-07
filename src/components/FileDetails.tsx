@@ -10,11 +10,14 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { FilePreview } from "@/components/FilePreview";
 import { ImgPreviewSidebar } from "@/components/ImgPreviewSidebar";
+import { Separator } from "@/components/ui/separator";
+import { FileInfo } from "@/components/FileInfo";
 
 /**
  * Types
@@ -87,10 +90,20 @@ export const FileDetails = ({ open, onOpenChange, file }: FileDetailsType) => {
                 handlePromptChange={handlePromptChange}
               />
             ) : (
-              <div className="border"></div>
+              <div className="border rounded-lg p-5 bg-muted/40">
+                <h3 className="font-semibold text-foreground mb-2">
+                  File Information
+                </h3>
+
+                <Separator className="mt-2 mb-4" />
+
+                <FileInfo file={file} />
+              </div>
             )}
           </div>
         </div>
+
+        <DialogFooter className="border-t pt-2"></DialogFooter>
       </DialogContent>
     </Dialog>
   );
